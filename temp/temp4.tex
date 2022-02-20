@@ -1,0 +1,206 @@
+\RequirePackage{plautopatch} 
+%\documentclass[draft,dvipdfmx]{jlreq}
+\documentclass[final,dvipdfmx]{jlreq}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% loading packages %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{showkeys}
+\usepackage[l2tabu,orthodox]{nag}
+\usepackage[all, warning]{onlyamsmath}
+\usepackage[bookmarks=false,draft=false,breaklinks,colorlinks]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% page style %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\allowdisplaybreaks
+
+%for English
+%\renewcommand{\figurename}{Figure }
+%\renewcommand{\contentsname}{Contents}
+%\renewcommand{\refname}{References}
+%\renewcommand{\appendixname}{Appendix }
+%\renewcommand{\theenumi}{\arabic{enumi}}
+%\renewcommand{\labelenumi}{(\theenumi)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% theorem environment %%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{definition}
+\newtheorem{thm}{定理}[subsection]
+\newtheorem{prp}[thm]{命題}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{exm}[thm]{例}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{fct}[thm]{事実}
+\newtheorem*{thm*}{定理}
+\newtheorem*{dfn*}{定義}
+\newtheorem*{prp*}{命題}
+\newtheorem*{lem*}{補題}
+\newtheorem*{cor*}{系}
+\newtheorem*{fct*}{事実}
+\newtheorem*{rmk*}{注意}
+\newtheorem*{exm*}{例}
+
+%for English
+%\theoremstyle{definition}
+%\newtheorem{thm}{Theorem}[subsection]
+%\newtheorem{prp}[thm]{Proposition}
+%\newtheorem{lem}[thm]{Lemma}
+%\newtheorem{cor}[thm]{Corollary}
+%\newtheorem{dfn}[thm]{Definition}
+%\newtheorem{fct}[thm]{Fact}
+%\newtheorem{rmk}[thm]{Remark}
+%\newtheorem{exm}[thm]{Example}
+%\newtheorem*{thm*}{Theorem}
+%\newtheorem*{prp*}{Proposition}
+%\newtheorem*{lem*}{Lemma}
+%\newtheorem*{dfn*}{Definition}
+%\newtheorem*{fct*}{Fact}
+%\newtheorem*{rmk*}{Remark}
+%\newtheorem*{exm*}{Example}
+%\renewcommand{\proofname}{\textbf{\emph{Proof}}}
+
+%%%%%%%%%%%%%%%%%%%%%% abbreviations / math operators %%%%%%%%%%%%%%%%
+
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\wh}{\widehat}
+\newcommand{\wt}{\widetilde}
+\newcommand{\bl}{\bullet}
+\newcommand{\ep}{\epsilon}
+\newcommand{\ve}{\varepsilon}
+
+\newcommand{\xr}{\xrightarrow}
+\newcommand{\xrr}[1]{\xrightarrow{\, #1 \, }}
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\srj}{\twoheadrightarrow}
+\newcommand{\lto}{\longrightarrow}
+\newcommand{\sto}{\xr{\sim}}
+\newcommand{\lsto}{\xrr{\sim}}
+\newcommand{\linj}{\lhook\joinrel\longrightarrow}
+\newcommand{\lsrj}{\relbar\joinrel\twoheadrightarrow}
+
+\newcommand{\tsum}{{\textstyle \sum}}
+\newcommand{\tprd}{{\textstyle \prod}}
+\newcommand{\Wedge}{{\textstyle \bigwedge}}
+
+
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\frb}{\mathfrak{b}}
+\newcommand{\frg}{\mathfrak{g}}
+\newcommand{\frh}{\mathfrak{h}}
+\newcommand{\frn}{\mathfrak{n}}
+\newcommand{\frs}{\mathfrak{s}}
+\newcommand{\fsl}{\mathfrak{sl}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calL}{\mathcal{L}}
+
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rank}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Iso}{Iso}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Rep}{Rep}
+\DeclareMathOperator{\Coh}{Coh}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Supp}{Supp}
+
+\DeclareMathOperator{\add}{add}
+\DeclareMathOperator{\fmd}{mod}
+\DeclareMathOperator{\Mod}{Mod}
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\spn}[1]{\langle #1 \rangle}
+\newcommand{\rst}[2]{\left. #1 \right|_{#2}}
+\newcommand{\pair}[2]{\left< #1, #2 \right>}
+
+\newenvironment{bsmatrix}{\left[\begin{smallmatrix}}{\end{smallmatrix}\right]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+
+\def\id#1{\def\@id{#1}}
+\def\adviser#1{\def\@adviser{#1}}
+\def\@maketitle{
+\begin{center}
+{\LARGE\textbf{\@title} \par}
+\vspace{30mm}
+{\Large 学籍番号:　\@id \par}
+{\Large 氏名:　 \@author \par}
+\vspace{20mm}
+{\Large アドバイザー:　\@adviser \par}
+\vspace{10mm}
+{\Large \@date\par}
+\end{center}
+}
+\makeatother
+
+
+\title{少人数クラス内容報告・講義内容要約}
+\author{}% 氏名 
+\id{}% 学籍番号
+\adviser{柳田　伸太郎}
+\date{2021年4月13日}% 提出年月日部分
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\newpage
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\part{少人数クラス報告: ...}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{...}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\part{講義概要報告}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{xx学特別講義xx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\addcontentsline{toc}{section}{参考文献}
+%\addcontentsline{toc}{section}{References}
+\begin{thebibliography}{MMN}
+\bibitem[Ha77]{Ha}
+R.~Hartshorne, \emph{Algebraic Geometry},
+Grad.\ Text Math., \textbf{52}, Springer-Verlag, 1977.
+\end{thebibliography}
+
+\end{document}

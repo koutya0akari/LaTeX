@@ -1,0 +1,223 @@
+\documentclass[dvipdfmx]{jsarticle}
+\usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{fancybox}
+\usepackage{ascmac}
+\usepackage{mathrsfs}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{wrapfig}
+\usepackage{latexsym}
+\usepackage{MnSymbol}
+\usepackage{tcolorbox}
+\usepackage{varwidth} 
+\usepackage{framed,color}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{here}
+\usetikzlibrary{cd}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{%
+ setpagesize=false,%
+ bookmarks=true,%
+ bookmarksdepth=tocdepth,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ urlcolor=magenta,%
+ pdftitle={},%
+ pdfsubject={},%
+ pdfauthor={},%
+ pdfkeywords={}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tcbuselibrary{breakable, skins, theorems}
+\definecolor{frameinnercolor}{rgb}{0.21, 0.27, 0.31}
+
+\newcounter{theorem}
+\numberwithin{theorem}{subsection}% numberwithinはamsmath.styで定義されている
+\newenvironment{theorem}[2][]{%
+%#1 = タイトル,　#2 = 定理環境名
+\refstepcounter{theorem}%
+\newtcolorbox{theobox}[1][]{%
+enhanced,frame empty,interior empty,
+coltitle=white,fonttitle=\bfseries,colbacktitle=frameinnercolor,
+sharp corners,
+extras broken={frame empty,interior empty},
+borderline={0.5mm}{0mm}{frameinnercolor},
+breakable=true,
+top=4mm,
+sharp corners,
+before skip=3.5mm,
+attach boxed title to top left={yshift=-3mm,xshift=3mm},
+boxed title style={boxrule=0pt,sharp corners=all},varwidth boxed title,
+title=##1,
+}
+\ifstrempty{#1}{% ifstremptyはetoolbox.styで定義．etoolbox.styはtcolorboxが読み込むので宣言不要
+\begin{theobox}[#2~\thetheorem.]}
+{\begin{theobox}[#2~\thetheorem:~{#1}]}
+}{\end{theobox}}
+
+\newenvironment{theo}[1][]%
+{\begin{theorem}[#1]{Theorem}%
+}{\end{theorem}}
+
+\newenvironment{proposition}[1][]%
+{\begin{theorem}[#1]{Proposition}%
+}{\end{theorem}}
+
+\newenvironment{lemma}[1][]%
+{\begin{theorem}[#1]{Lemma}%
+}{\end{theorem}}
+
+\newenvironment{corollary}[1][]%
+{\begin{theorem}[#1]{Corollary}%
+}{\end{theorem}}
+
+\newenvironment{dfn}[1][]%
+{\begin{theorem}[#1]{Definition}%
+}{\end{theorem}}
+
+\newenvironment{prob}[1][]%
+{\begin{theorem}[#1]{Probrem}%
+}{\end{theorem}}
+
+\newenvironment{example}[1][]%
+{\begin{theorem}[#1]{Example}%
+}{\end{theorem}}
+
+\newtheorem*{answer*}{$\mathcal{A}$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%マクロ
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\O}{\mathbb{O}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\W}{\mathbb{W}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\a}{\mathbb{a}}
+\renewcommand{\b}{\mathbb{b}}
+\renewcommand{\c}{\mathbb{c}}
+\renewcommand{\d}{\mathbb{d}}
+\newcommand{\e}{\mathbb{e}}
+\newcommand{\f}{\mathbb{f}}
+\newcommand{\g}{\mathbb{g}}
+\renewcommand{\i}{\mathbb{i}}
+\renewcommand{\j}{\mathbb{j}}
+\renewcommand{\k}{\mathbb{k}}
+\newcommand{\m}{\mathbb{m}}
+\newcommand{\n}{\mathbb{n}}
+\renewcommand{\o}{\mathbb{o}}
+\newcommand{\p}{\mathbb{p}}
+\newcommand{\q}{\mathbb{q}}
+\renewcommand{\r}{\mathbb{r}}
+\renewcommand{\t}{\mathbb{t}}
+\renewcommand{\u}{\mathbb{u}}
+\renewcommand{\v}{\mathbb{v}}
+\newcommand{\w}{\mathbb{w}}
+\newcommand{\x}{\mathbb{x}}
+\newcommand{\y}{\mathbb{y}}
+\newcommand{\z}{\mathbb{z}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\liea}{\mathfrak{a}}
+\newcommand{\lieb}{\mathfrak{b}}
+\newcommand{\liec}{\mathfrak{c}}
+\newcommand{\lied}{\mathfrak{d}}
+\newcommand{\liee}{\mathfrak{e}}
+\newcommand{\lief}{\mathfrak{f}}
+\newcommand{\lieg}{\mathfrak{g}}
+\newcommand{\lieh}{\mathfrak{h}}
+\newcommand{\liei}{\mathfrak{i}}
+\newcommand{\liej}{\mathfrak{j}}
+\newcommand{\liek}{\mathfrak{k}}
+\newcommand{\liel}{\mathfrak{l}}
+\newcommand{\liem}{\mathfrak{m}}
+\newcommand{\lien}{\mathfrak{n}}
+\newcommand{\lieo}{\mathfrak{o}}
+\newcommand{\liep}{\mathfrak{p}}
+\newcommand{\lieq}{\mathfrak{q}}
+\newcommand{\lier}{\mathfrak{r}}
+\newcommand{\lies}{\mathfrak{s}}
+\newcommand{\liet}{\mathfrak{t}}
+\newcommand{\lieu}{\mathfrak{u}}
+\newcommand{\liev}{\mathfrak{v}}
+\newcommand{\liew}{\mathfrak{w}}
+\newcommand{\liex}{\mathfrak{x}}
+\newcommand{\liey}{\mathfrak{y}}
+\newcommand{\liez}{\mathfrak{z}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\vca}{\bm{a}}
+\newcommand{\vcb}{\bm{b}}
+\newcommand{\vcc}{\bm{c}}
+\newcommand{\vcd}{\bm{d}}
+\newcommand{\vce}{\bm{e}}
+\newcommand{\vcf}{\bm{f}}
+\newcommand{\vcg}{\bm{g}}
+\newcommand{\vch}{\bm{h}}
+\newcommand{\vci}{\bm{i}}
+\newcommand{\vcj}{\bm{j}}
+\newcommand{\vck}{\bm{k}}
+\newcommand{\vcl}{\bm{l}}
+\newcommand{\vcm}{\bm{m}}
+\newcommand{\vcn}{\bm{n}}
+\newcommand{\vco}{\bm{o}}
+\newcommand{\vcp}{\bm{p}}
+\newcommand{\vcq}{\bm{q}}
+\newcommand{\vcr}{\bm{r}}
+\newcommand{\vcs}{\bm{s}}
+\newcommand{\vct}{\bm{t}}
+\newcommand{\vcu}{\bm{u}}
+\newcommand{\vcv}{\bm{v}}
+\newcommand{\vcw}{\bm{w}}
+\newcommand{\vcx}{\bm{x}}
+\newcommand{\vcy}{\bm{y}}
+\newcommand{\vcz}{\bm{z}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rank}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Iso}{Iso}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Rep}{Rep}
+\DeclareMathOperator{\Coh}{Coh}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\UFD}{UFD}
+\DeclareMathOperator{\PID}{PID}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\Frac}{Frac}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\numberwithin{equation}{subsection}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
