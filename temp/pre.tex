@@ -165,43 +165,43 @@ top=3pt,bottom=3pt,left=3pt,right=3pt,
 underlay unbroken={
   %in
   \draw[black,line width =.5]
-  ([xshift=4pt]frame.north west)
-  --([xshift=-4pt]frame.north east)
-  -- ([xshift=-4pt]frame.south east) 
-  -- ([xshift=4pt]frame.south west) 
-  -- ([xshift=4pt]frame.north west);
+  ([xshift=2pt]frame.north west)
+  --([xshift=-2pt]frame.north east)
+  -- ([xshift=-2pt]frame.south east) 
+  -- ([xshift=2pt]frame.south west) 
+  -- ([xshift=2pt]frame.north west);
   %out
   \draw[black,line width=.5pt]
-  ([yshift=4pt]frame.north west)
-  --([yshift=4pt]frame.north east)
-  -- ([yshift=-4pt]frame.south east) 
-  -- ([yshift=-4pt]frame.south west) 
-  -- ([yshift=4pt]frame.north west);
+  ([yshift=2pt]frame.north west)
+  --([yshift=2pt]frame.north east)
+  -- ([yshift=-2pt]frame.south east) 
+  -- ([yshift=-2pt]frame.south west) 
+  -- ([yshift=2pt]frame.north west);
   },
 underlay first={
   %in
   \draw[black,line width =.5]
-  ([xshift=4pt]frame.north west)
-  --([xshift=-4pt]frame.north east);
+  ([xshift=2pt]frame.north west)
+  --([xshift=-2pt]frame.north east);
   \draw[black,line width =.5]
-  -- ([xshift=4pt]frame.south west) 
-  -- ([xshift=4pt]frame.north west);
+  -- ([xshift=2pt]frame.south west) 
+  -- ([xshift=2pt]frame.north west);
   %out
   \draw[black,line width=.5pt]
-  ([yshift=4pt]frame.north west)
-  --([yshift=4pt]frame.north east);
+  ([yshift=2pt]frame.north west)
+  --([yshift=2pt]frame.north east);
   \draw[black,line width =.5]
-  ([yshift=-4pt]frame.south west) 
-  -- ([yshift=4pt]frame.north west);  
+  ([yshift=-2pt]frame.south west) 
+  -- ([yshift=2pt]frame.north west);  
   },
 underlay middle={
   %in
   \draw[black,line width =.5]
-  ([xshift=-4pt]frame.north east)
-  -- ([xshift=-4pt]frame.south east) 
+  ([xshift=-2pt]frame.north east)
+  -- ([xshift=-2pt]frame.south east) 
   \draw[black,line width =.5]
-  ([xshift=4pt]frame.south west) 
-  -- ([xshift=4pt]frame.north west);
+  ([xshift=2pt]frame.south west) 
+  -- ([xshift=2pt]frame.north west);
   %out
   \draw[black,line width=.5pt]
   (frame.north east)
@@ -213,16 +213,16 @@ underlay middle={
 underlay last={
   %in
   \draw[black,line width =.5]
-  ([xshift=-4pt,yshift=4pt]frame.north east)
-  -- ([xshift=-4pt]frame.south east) 
-  -- ([xshift=4pt]frame.south west) 
-  -- ([xshift=4pt,yshift=4pt]frame.north west);
+  ([xshift=-2pt,yshift=2pt]frame.north east)
+  -- ([xshift=-2pt]frame.south east) 
+  -- ([xshift=2pt]frame.south west) 
+  -- ([xshift=2pt,yshift=2pt]frame.north west);
   %out
   \draw[black,line width=.5pt]
-  ([yshift=4pt]frame.north east)
-  -- ([yshift=-4pt]frame.south east) 
-  -- ([yshift=-4pt]frame.south west) 
-  -- ([yshift=4pt]frame.north west);  
+  ([yshift=2pt]frame.north east)
+  -- ([yshift=-2pt]frame.south east) 
+  -- ([yshift=-2pt]frame.south west) 
+  -- ([yshift=2pt]frame.north west);  
   },
 }
 
