@@ -1,0 +1,214 @@
+\documentclass[dvipdfmx]{jsarticle}
+\usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{fancybox}
+\usepackage{ascmac}
+\usepackage{mathrsfs}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{wrapfig}
+\usepackage{latexsym}
+\usepackage{MnSymbol}
+\usepackage{tcolorbox}
+\usepackage{varwidth} 
+\usepackage{framed,color}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+\tikzset{cross/.style={preaction={-,draw=white,line width=6pt}}}
+\usetikzlibrary{cd}
+\tcbuselibrary{breakable, skins, theorems}
+\definecolor{charcoal}{rgb}{0.21, 0.27, 0.31}
+\tcbset{
+mytheo/.style={fonttitle=\gtfamily\sffamily\bfseries\upshape,
+  enhanced,colframe=charcoal,colback=charcoal!2!white,colbacktitle=charcoal,
+  boxrule=0pt,borderline south={2pt}{-2pt}{charcoal},
+  left*=1zw,right*=1zw,
+  theorem style=standard,
+  breakable,sharp corners,
+  before skip=8pt,
+  after skip=10pt,
+  before upper={\setlength{\parindent}{1zw}},
+  before lower={\setlength{\parindent}{1zw}}
+}}
+%Theorem
+\newtcbtheorem[number within=section]{theorem}{Theorem}%
+{mytheo}{th}
+\newcommand{\thref}[1]{{\bfseries\sffamily Theorem \ref{th:#1}}}
+%Proposition
+\newtcbtheorem[use counter from=theorem]{prop}{Proposition}%
+{mytheo}{pr}
+\newcommand{\prref}[1]{{\bfseries\sffamily Proposition \ref{pr:#1}}}
+%Corollary
+\newtcbtheorem[use counter from=theorem]{cor}{Corollary}%
+{mytheo}{co}
+\newcommand{\coref}[1]{{\bfseries\sffamily Corollary \ref{co:#1}}}
+%Definition
+\newtcbtheorem[use counter from=theorem]{dfn}{Definition}%
+{mytheo}{de}
+\newcommand{\deref}[1]{{\bfseries\sffamily Definition \ref{de:#1}}}
+%Lemma
+\newtcbtheorem[use counter from=theorem]{lem}{Lemma}%
+{mytheo}{le}
+\newcommand{\leref}[1]{{\bfseries\sffamily Lemma \ref{le:#1}}}
+%Example
+\definecolor{charcoal}{rgb}{0.21, 0.27, 0.31}
+\newtcbtheorem[use counter from=theorem]{ex}{Example}%
+{mytheo}{ex}
+\newcommand{\exref}[1]{{\bfseries\sffamily Example \ref{ex:#1}}}
+%Probrem
+\newtcbtheorem[use counter from=theorem]{prob}{Probrem}%
+{mytheo}{prob}
+\newcommand{\probref}[1]{{\bfseries\sffamily Probrem \ref{prob:#1}}}
+\numberwithin{equation}{subsection}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%マクロ
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\O}{\mathbb{O}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\W}{\mathbb{W}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\a}{\mathbb{a}}
+\renewcommand{\b}{\mathbb{b}}
+\renewcommand{\c}{\mathbb{c}}
+\renewcommand{\d}{\mathbb{d}}
+\newcommand{\e}{\mathbb{e}}
+\newcommand{\f}{\mathbb{f}}
+\newcommand{\g}{\mathbb{g}}
+\renewcommand{\i}{\mathbb{i}}
+\renewcommand{\j}{\mathbb{j}}
+\renewcommand{\k}{\mathbb{k}}
+\newcommand{\m}{\mathbb{m}}
+\newcommand{\n}{\mathbb{n}}
+\renewcommand{\o}{\mathbb{o}}
+\newcommand{\p}{\mathbb{p}}
+\newcommand{\q}{\mathbb{q}}
+\renewcommand{\r}{\mathbb{r}}
+\renewcommand{\t}{\mathbb{t}}
+\renewcommand{\u}{\mathbb{u}}
+\renewcommand{\v}{\mathbb{v}}
+\newcommand{\w}{\mathbb{w}}
+\newcommand{\x}{\mathbb{x}}
+\newcommand{\y}{\mathbb{y}}
+\newcommand{\z}{\mathbb{z}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\liea}{\mathfrak{a}}
+\newcommand{\lieb}{\mathfrak{b}}
+\newcommand{\liec}{\mathfrak{c}}
+\newcommand{\lied}{\mathfrak{d}}
+\newcommand{\liee}{\mathfrak{e}}
+\newcommand{\lief}{\mathfrak{f}}
+\newcommand{\lieg}{\mathfrak{g}}
+\newcommand{\lieh}{\mathfrak{h}}
+\newcommand{\liei}{\mathfrak{i}}
+\newcommand{\liej}{\mathfrak{j}}
+\newcommand{\liek}{\mathfrak{k}}
+\newcommand{\liel}{\mathfrak{l}}
+\newcommand{\liem}{\mathfrak{m}}
+\newcommand{\lien}{\mathfrak{n}}
+\newcommand{\lieo}{\mathfrak{o}}
+\newcommand{\liep}{\mathfrak{p}}
+\newcommand{\lieq}{\mathfrak{q}}
+\newcommand{\lier}{\mathfrak{r}}
+\newcommand{\lies}{\mathfrak{s}}
+\newcommand{\liet}{\mathfrak{t}}
+\newcommand{\lieu}{\mathfrak{u}}
+\newcommand{\liev}{\mathfrak{v}}
+\newcommand{\liew}{\mathfrak{w}}
+\newcommand{\liex}{\mathfrak{x}}
+\newcommand{\liey}{\mathfrak{y}}
+\newcommand{\liez}{\mathfrak{z}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\vca}{\bm{a}}
+\newcommand{\vcb}{\bm{b}}
+\newcommand{\vcc}{\bm{c}}
+\newcommand{\vcd}{\bm{d}}
+\newcommand{\vce}{\bm{e}}
+\newcommand{\vcf}{\bm{f}}
+\newcommand{\vcg}{\bm{g}}
+\newcommand{\vch}{\bm{h}}
+\newcommand{\vci}{\bm{i}}
+\newcommand{\vcj}{\bm{j}}
+\newcommand{\vck}{\bm{k}}
+\newcommand{\vcl}{\bm{l}}
+\newcommand{\vcm}{\bm{m}}
+\newcommand{\vcn}{\bm{n}}
+\newcommand{\vco}{\bm{o}}
+\newcommand{\vcp}{\bm{p}}
+\newcommand{\vcq}{\bm{q}}
+\newcommand{\vcr}{\bm{r}}
+\newcommand{\vcs}{\bm{s}}
+\newcommand{\vct}{\bm{t}}
+\newcommand{\vcu}{\bm{u}}
+\newcommand{\vcv}{\bm{v}}
+\newcommand{\vcw}{\bm{w}}
+\newcommand{\vcx}{\bm{x}}
+\newcommand{\vcy}{\bm{y}}
+\newcommand{\vcz}{\bm{z}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rank}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Iso}{Iso}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Rep}{Rep}
+\DeclareMathOperator{\Coh}{Coh}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\UFD}{UFD}
+\DeclareMathOperator{\PID}{PID}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\Frac}{Frac}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{%
+ setpagesize=false,%
+ bookmarks=true,%
+ bookmarksdepth=tocdepth,%
+ bookmarksnumbered=true,%
+ colorlinks=true,%
+ urlcolor=blue,%
+ pdftitle={},%
+ pdfsubject={},%
+ pdfauthor={},%
+ pdfkeywords={}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\numberwithin{equation}{subsection}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
