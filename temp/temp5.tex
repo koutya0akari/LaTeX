@@ -1,13 +1,12 @@
 \documentclass[dvipdfmx]{jsarticle}
 \usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{multicol}
-\usepackage{amsthm}
-\usepackage{amsmath}
 \usepackage{fancybox}
 \usepackage{ascmac}
 \usepackage{mathrsfs}
 \usepackage{amsfonts}
-\usepackage{amssymb}
+\usepackage{aliascnt}
 \usepackage{graphics}
 \usepackage{tikz}
 \usepackage{tikz-cd}
@@ -19,53 +18,128 @@
 \usepackage{framed,color}
 \usepackage{enumerate}
 \usepackage{bm}
-\usepackage{hyperref}
-\usepackage{pxjahyper}
 \usepackage{here}
 \usepackage{setspace}
 \usepackage{geometry}
 \usepackage{pst-solides3d}
 \usepackage{pgfplots}
 \usepackage{fancyhdr}
-
+\usepackage{hyperref}
+\usepackage{pxjahyper}
+\tcbuselibrary{many}
 \geometry{top=30mm, bottom=30mm, left=25mm, right=25mm}
 \usetikzlibrary{cd}
 \usetikzlibrary{shapes.geometric,fit}
+\tikzset{cross/.style={preaction={-,draw=white,line width=6pt}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{pop}{RGB}{106,90,205}
+\hypersetup{
+  setpagesize=false,
+  bookmarks=true,
+  bookmarksdepth=tocdepth,
+  bookmarksnumbered=true,
+  colorlinks=true,
+  urlcolor=cyan,
+  citecolor=pop,
+  linkcolor=pop,  
+  pdftitle={cyan},
+  pdfsubject={},
+  pdfauthor={},
+  pdfkeywords={}
+}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[xcolor]{mdframed}
 \usepackage{silence}\WarningFilter{mdframed}{You got a bad break}
+
+\newtheorem{mistake}{誤植}
+\newtheorem{fix}{修正}
+
+\tcolorboxenvironment{mistake}
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=2pt,bottom=2pt,left=2pt,right=2pt,
+borderline west={.75pt}{2pt}{black,dotted},
+underlay unbroken={
+  \filldraw[fill=gray,draw=gray]
+  (frame.south west) -- +(0pt,5pt) -- +(5pt,5pt) -- +(5pt,0pt) -- cycle;
+  \filldraw[fill=gray,draw=gray]
+  (frame.north west) -- +(0pt,-5pt) -- +(5pt,-5pt) -- +(5pt,0pt) -- cycle;
+  },
+underlay first={
+  \filldraw[fill=gray,draw=gray]
+  (frame.north west) -- +(0pt,-5pt) -- +(5pt,-5pt) -- +(5pt,0pt) -- cycle;
+  },
+underlay middle={
+  \draw[black,line width=.5pt]
+  (frame.south west)--(frame.north west) ;
+  },
+underlay last={
+  \filldraw[fill=gray,draw=gray]
+  (frame.south west) -- +(0pt,5pt) -- +(5pt,5pt) -- +(5pt,0pt) -- cycle;
+  }
+}
+
+\tcolorboxenvironment{fix}
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=2pt,bottom=2pt,left=2pt,right=2pt,
+borderline west={.75pt}{2pt}{black},
+underlay unbroken={
+  \filldraw[fill=gray,draw=gray]
+  (frame.south west) -- +(0pt,5pt) -- +(5pt,5pt) -- +(5pt,0pt) -- cycle;
+  \filldraw[fill=gray,draw=gray]
+  (frame.north west) -- +(0pt,-5pt) -- +(5pt,-5pt) -- +(5pt,0pt) -- cycle;
+  },
+underlay first={
+  \filldraw[fill=gray,draw=gray]
+  (frame.north west) -- +(0pt,-5pt) -- +(5pt,-5pt) -- +(5pt,0pt) -- cycle;
+  },
+underlay middle={
+  \draw[black,line width=.5pt]
+  (frame.south west)--(frame.north west) ;
+  },
+underlay last={
+  \filldraw[fill=gray,draw=gray]
+  (frame.south west) -- +(0pt,5pt) -- +(5pt,5pt) -- +(5pt,0pt) -- cycle;
+  }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%leftbarの再定義%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\oldtheorem=\newtheorem
-\mdfdefinestyle{leftbar}{topline=false,rightline=false,bottomline=false,innertopmargin=0pt,linewidth=1.5pt,linecolor=black}
+\mdfdefinestyle{leftbar}{topline=false,rightline=false,bottomline=false,innertopmargin=0pt,linewidth=1pt,linecolor=black}
 \newcommand{\NewTheorem}[2][linecolor=black]{\surroundwithmdframed[style=leftbar,#1]{#2}\oldtheorem{#2}}
 \newcommand{\NewTheoremStar}[2][linecolor=black]{\surroundwithmdframed[style=leftbar,#1]{#2}\oldtheorem*{#2}}
 \makeatletter\renewcommand{\newtheorem}{\@ifstar{\NewTheoremStar}{\NewTheorem}}\makeatother
+
 \newtheoremstyle{mydefinition}{\topsep}{\topsep}{\rmfamily}{0pt}{\sffamily\gtfamily\bfseries}{\newline}{1em}
 {\underline{\thmname{#1}\thmnumber{ #2}\thmnote{ : #3 }\rmfamily}}
+
 \theoremstyle{mydefinition}
 
-\newtheorem{thm}{Theorem}[subsection]
-\newtheorem{lem}[thm]{Lemma}
-\newtheorem{dfn}[thm]{Definition}
-\newtheorem{cor}[thm]{Corollary}
-\newtheorem{prop}[thm]{Proposition}
-\newtheorem{ex}[thm]{Example}
-\newtheorem{re}[thm]{Remark}
-\newtheorem{exe}[thm]{Exercise}
+% \newaliastheorem{（環境とカウンターの名前）}{（元となるカウンターの名前）}{（表示される文字列）}
+\newcommand*{\newaliastheorem}[3]{%
+  \newaliascnt{#1}{#2}%
+  \newtheorem{#1}[#1]{#3}%
+  \aliascntresetthe{#1}%
+  \expandafter\newcommand\csname #1autorefname\endcsname{#3}%
+}
 
-\newcommand{\thmref}[1]{{\bfseries\sffamily Theorem \ref{#1}}}
-\newcommand{\propref}[1]{{\bfseries\sffamily Proposition \ref{#1}}}
-\newcommand{\coref}[1]{{\bfseries\sffamily Corollary \ref{#1}}}
-\newcommand{\defref}[1]{{\bfseries\sffamily Definition \ref{#1}}}
-\newcommand{\lemref}[1]{{\bfseries\sffamily Lemma \ref{#1}}}
-\newcommand{\exref}[1]{{\bfseries\sffamily Example \ref{#1}}}
-\newcommand{\reref}[1]{{\bfseries\sffamily Remark \ref{#1}}}
-\newcommand{\exeref}[1]{{\bfseries\sffamily Exercise \ref{#1}}}
-\newcommand{\picref}[1]{{\bfseries\sffamily 図 \ref{#1}}}
+\newtheorem{thm}{Theorem}[subsection]
+\renewcommand{\theoremautorefname}{定理}
+\newaliastheorem{lem}{thm}{Lemma}
+\newaliastheorem{dfn}{thm}{Definition}
+\newaliastheorem{cor}{thm}{Corollary}
+\newaliastheorem{prop}{thm}{Proposition}
+\newaliastheorem{ex}{thm}{Example}
+\newaliastheorem{re}{thm}{Remark}
+\newaliastheorem{exe}{thm}{Exercise}
 
 \makeatletter % use at mark
 \renewenvironment{proof}[1][\proofname]{\par
@@ -121,7 +195,6 @@
 \renewcommand{\j}{\mathbb{j}}
 \renewcommand{\k}{\mathbb{k}}
 \newcommand{\m}{\mathbb{m}}
-\newcommand{\n}{\mathbb{n}}
 \renewcommand{\o}{\mathbb{o}}
 \newcommand{\p}{\mathbb{p}}
 \newcommand{\q}{\mathbb{q}}
