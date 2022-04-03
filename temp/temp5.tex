@@ -1,35 +1,114 @@
-\documentclass[dvipdfmx]{jsarticle}
-\usepackage[dvipdfmx]{graphicx,xcolor}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage{multicol}
-\usepackage{fancybox}
-\usepackage{ascmac}
-\usepackage{mathrsfs}
-\usepackage{amsfonts}
-\usepackage{aliascnt}
-\usepackage{graphics}
-\usepackage{tikz}
-\usepackage{tikz-cd}
-\usepackage{wrapfig}
+% 通常 platex + dvipdfmx で動作している
+% (u)platex は DVI 出力エンジン, 対して pdfTeX, LuaTeX, XeTeX PDF 出力エンジン
+% DVI 出力エンジンを使用する場合, ドライバ指定をする必要がある
+\documentclass[dvipdfmx]{bxjsreport}
+% \documentclass[dvipdfmx]{jsarticle}
+% \documentclass[dvipdfmx]{bxjsbook}
+% dvipdfmx でドライバ指定している理由は graphicx,xcolor などがドライバ依存のパッケージであるため
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \usepackage{graphicx}
+% png や jpeg といった図を pdf に挿入できるようにする
+% ※ 注意 : tikzより前に読み込む必要あり
+\usepackage[x11names]{xcolor} % マニュアル : コマンドラインから texdoc xcolor を実行
+% xoclor : 文字などの書式に色をつけることができる
+% x11names : 使える色名が317色(rgb)増える. デフォルトでは 19色
+% デフォルト19色 : red，green，blue，cyan，magenta，yellow，black，gray，white，darkgray，lightgray，brown，lime，olive，orange，pink，purple，teal，violet
+% ※ 注意 : graphicx,xcolor はどちらも dvipdfmx のドライバ指定が必須
+% ※ 注意 : オプションを使用する場合, tikzより前に読み込む必要あり
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 基本 %%
+
+\usepackage{amsmath,mathtools}
+% 数式関数 align などを使えるようにする
+\usepackage{amsthm}
+% 定理環境 theoremstyle 制作
+\usepackage{amssymb}
+% 基本的な数学記号などの導入
 \usepackage{latexsym}
+% 数式で使える記号を増やす
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% tikz (てぃくす)関係 %% % https://texwiki.texjp.org/?TikZ
+
+\usepackage{tikz}
+% \begin{tikzpicture} hoge \end{tikzpicture} により図式を書けるようにする
+% beamer の基礎エンジンでもある
+% ※ 注意 : graphicx,xcolor 読み込まれている
+\usepackage{tikz-cd}
+% \begin{tikzcd} hoge \end{tikzcd} により図式を書けるようにする
+% \usepackage{tikz} + \usetikzlibrary{cd} でも同等の環境
+% ※ 注意 : graphicx,xcolor のパッケージを読み込んだ後に読み込む必要がある
+
+\usetikzlibrary{patterns,calc,arrows,decorations,angles,shapes.geometric,fit}
+% patterns : 背景パターンを塗る 
+% intersections : 交点を求める 
+% calc : tikz の座標計算を可能にする
+% arrows : 矢印の種類を増やす
+% decorations : パスを飾る 
+% angles : 角度記号を描く 
+% shapes.geometric : いろいろな形を追加する
+% fit : 複数座標を使える
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancybox}
+% shadowbox　や doublebox 環境の枠の追加
+\usepackage{ascmac}
+% itembox 環境 やそのほか多数の枠の追加
+\usepackage{tcolorbox} % https://www.ctan.org/pkg/tcolorbox
+% ページまたぎが可能で tikz で枠を作成できるコマンド tcolorbox を使えるようにする
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{multicol}
+% 段組の書式などを出力できるようにする
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings,jvlisting}
+% 日本語のコメントアウトをする場合 jvlisting （もしくは jlisting ） が必要
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{calrsfs}
+% mathcal などで calligraphic letters を出力できるようにする
+\usepackage{mathrsfs}
+% \mathscr で花文字を出力できるようにする(花文字はいろいろ種類あるらしいので自分好みのパッケージを探してください)
+\usepackage{amsfonts}
+% 黒板太文字 mathbb や フラクトゥール mathfrak を使用できるようにする
+\usepackage{bm}
+% コマンド bm で太文字の斜体などを使えるようにする
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{wrapfig}
+% 図を回り込ませるためのパッケージ
 \usepackage{MnSymbol}
-\usepackage{tcolorbox}
 \usepackage{varwidth} 
 \usepackage{framed,color}
+% 改ページ可能なフレームの出力
 \usepackage{enumerate}
-\usepackage{bm}
+% オプションを追加することで高性能なカウンターをコマンド enumerate で使えるようにする
+\usepackage{paralist}
+% 改行しない箇条書きのコマンド, inparaenum を使えるようにする
 \usepackage{here}
+% 図の位置を指定するときに [H] をオプションに追加することで強制的にその場に出力する
 \usepackage{setspace}
+% 行間を変更できるようにする
 \usepackage{geometry}
+% 使う紙の大きさや、余白の長さなどを指定できる
 \usepackage{pst-solides3d}
 \usepackage{pgfplots}
+
 \usepackage{fancyhdr}
+% ページ番号を左上に表示する
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% hyperref 関係 %%
 \usepackage{hyperref}
+% TeX 文書 （DVI、PDF など） に HTML と同じハイパーリンク 機能を加えるためのマクロを導入する
+% https://texwiki.texjp.org/?hyperref
 \usepackage{pxjahyper}
+% hyperref などの日本語対応化パッケージ
+\usepackage[nameinlink]{cleveref}
+% 高性能な hyperref 
+% nameinlink : 参照の部分全体をハイパーリンクにできる
+% ※ 注意 : hyperref の後に導入する必要がある。
+\usepackage{aliascnt}
+% ref による参照を autoref により自動化する
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tcbuselibrary{many}
-\geometry{top=30mm, bottom=30mm, left=25mm, right=25mm}
-\usetikzlibrary{cd}
-\usetikzlibrary{shapes.geometric,fit}
+%\geometry{top=20mm, bottom=20mm, left=25mm, right=25mm}
 \tikzset{cross/.style={preaction={-,draw=white,line width=6pt}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \definecolor{pop}{RGB}{106,90,205}
@@ -48,10 +127,31 @@
   pdfkeywords={}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
 
-\usepackage[xcolor]{mdframed}
-\usepackage{silence}\WarningFilter{mdframed}{You got a bad break}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 現在必要ないパッケージ 群%%
+%\usepackage[xcolor]{mdframed}
+% 枠の作成に TikZ を利用することができる
+%\usepackage{silence}\WarningFilter{mdframed}{You got a bad break}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newtheorem{mistake}{誤植}
 \newtheorem{fix}{修正}
@@ -110,36 +210,127 @@ underlay last={
   }
 }
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%leftbarの再定義%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\let\oldtheorem=\newtheorem
-\mdfdefinestyle{leftbar}{topline=false,rightline=false,bottomline=false,innertopmargin=0pt,linewidth=1pt,linecolor=black}
-\newcommand{\NewTheorem}[2][linecolor=black]{\surroundwithmdframed[style=leftbar,#1]{#2}\oldtheorem{#2}}
-\newcommand{\NewTheoremStar}[2][linecolor=black]{\surroundwithmdframed[style=leftbar,#1]{#2}\oldtheorem*{#2}}
-\makeatletter\renewcommand{\newtheorem}{\@ifstar{\NewTheoremStar}{\NewTheorem}}\makeatother
+\newtcolorbox{lbar}[1]
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=2pt,bottom=2pt,left=2pt,right=2pt,
+borderline west={1pt}{2pt}{black},
+title={#1}
+}
 
 \newtheoremstyle{mydefinition}{\topsep}{\topsep}{\rmfamily}{0pt}{\sffamily\gtfamily\bfseries}{\newline}{1em}
 {\underline{\thmname{#1}\thmnumber{ #2}\thmnote{ : #3 }\rmfamily}}
 
 \theoremstyle{mydefinition}
 
+
 % \newaliastheorem{（環境とカウンターの名前）}{（元となるカウンターの名前）}{（表示される文字列）}
-\newcommand*{\newaliastheorem}[3]{%
-  \newaliascnt{#1}{#2}%
-  \newtheorem{#1}[#1]{#3}%
-  \aliascntresetthe{#1}%
-  \expandafter\newcommand\csname #1autorefname\endcsname{#3}%
+%\newcommand*{\newaliastheorem}[3]{%
+%  \newaliascnt{#1}{#2}%
+%  \newtheorem{#1}[#1]{#3}%
+%  \aliascntresetthe{#1}%
+%  \expandafter\newcommand\csname #1autorefname\endcsname{#3}%
+%}
+
+\newtheorem{thm}{Theorem}[section]
+\crefname{thm}{Theorem}{Theorems}
+\newtheorem{lem}[thm]{Lemma}
+\crefname{lem}{Lemma}{Lemmas}
+\newtheorem{dfn}[thm]{Definition}
+\crefname{dfn}{Definition}{Definitions}
+\newtheorem{cor}[thm]{Corollary}
+\crefname{cor}{Corollary}{Corollarys}
+\newtheorem{prop}[thm]{Proposition}
+\crefname{prop}{Proposition}{Propositions}
+\newtheorem{ex}[thm]{Example}
+\crefname{ex}{Example}{Examples}
+\newtheorem{re}[thm]{Remark}
+\crefname{re}{Remark}{Remarks}
+\newtheorem{exe}[thm]{Exercise}
+\crefname{exe}{Exercise}{Exercises}
+%\renewcommand{\theoremautorefname}{定理}
+%\newaliastheorem{lem}{thm}{Lemma}
+%\newaliastheorem{dfn}{thm}{Definition}
+%\newaliastheorem{cor}{thm}{Corollary}
+%\newaliastheorem{prop}{thm}{Proposition}
+%\newaliastheorem{ex}{thm}{Example}
+%\newaliastheorem{re}{thm}{Remark}
+%\newaliastheorem{exe}{thm}{Exercise}
+
+\tcolorboxenvironment{thm}
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=4pt,bottom=4pt,left=4pt,right=4pt,
+borderline west={0.75pt}{0.75pt}{black},
 }
 
-\newtheorem{thm}{Theorem}[subsection]
-\renewcommand{\theoremautorefname}{定理}
-\newaliastheorem{lem}{thm}{Lemma}
-\newaliastheorem{dfn}{thm}{Definition}
-\newaliastheorem{cor}{thm}{Corollary}
-\newaliastheorem{prop}{thm}{Proposition}
-\newaliastheorem{ex}{thm}{Example}
-\newaliastheorem{re}{thm}{Remark}
-\newaliastheorem{exe}{thm}{Exercise}
+\tcolorboxenvironment{lem}
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=4pt,bottom=4pt,left=4pt,right=4pt,
+borderline west={0.75pt}{0.75pt}{black},
+}
+
+\tcolorboxenvironment{dfn}
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=4pt,bottom=4pt,left=4pt,right=4pt,
+borderline west={0.75pt}{0.75pt}{black},
+}
+
+\tcolorboxenvironment{cor}
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=4pt,bottom=4pt,left=4pt,right=4pt,
+borderline west={0.75pt}{0.75pt}{black},
+}
+
+\tcolorboxenvironment{prop}
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=4pt,bottom=4pt,left=4pt,right=4pt,
+borderline west={0.75pt}{0.75pt}{black},
+}
+
+\tcolorboxenvironment{ex}
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=4pt,bottom=4pt,left=4pt,right=4pt,
+borderline west={0.75pt}{0.75pt}{black},
+}
+
+\tcolorboxenvironment{re}{
+  enhanced,
+  sharp corners,
+  breakable,
+  colback=white, colframe=white,
+  top=4pt,bottom=4pt,left=4pt,right=4pt,
+  boxrule=0.75pt,
+  borderline={0.75pt}{0.75pt}{black},
+}
+
+\tcolorboxenvironment{exe}
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=4pt,bottom=4pt,left=4pt,right=4pt,
+borderline west={0.75pt}{0.75pt}{black},
+}
 
 \makeatletter % use at mark
 \renewenvironment{proof}[1][\proofname]{\par
@@ -301,9 +492,6 @@ underlay last={
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \numberwithin{equation}{subsection}
-\renewcommand{\theequation}{\arabic{subsection}.\arabic{equation}}
-\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
-\renewcommand{\thetable}{\arabic{subsection}.\arabic{table}}
 \makeatletter
 \@addtoreset{equation}{subsection}
 \@addtoreset{figure}{section}

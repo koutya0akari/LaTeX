@@ -1,0 +1,149 @@
+% 通常 platex + dvipdfmx で動作している
+% (u)platex は DVI 出力エンジン, 対して pdfTeX, LuaTeX, XeTeX PDF 出力エンジン
+% DVI 出力エンジンを使用する場合, ドライバ指定をする必要がある
+%\documentclass[dvipdfmx]{bxjsreport}
+\documentclass[dvipdfmx]{jsarticle}
+% \documentclass[dvipdfmx]{bxjsbook}
+% dvipdfmx でドライバ指定している理由は graphicx,xcolor などがドライバ依存のパッケージであるため
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \usepackage{graphicx}
+% png や jpeg といった図を pdf に挿入できるようにする
+% ※ 注意 : tikzより前に読み込む必要あり
+%\usepackage{xcolor} % マニュアル : コマンドラインから texdoc xcolor を実行
+% xoclor : 文字などの書式に色をつけることができる
+% デフォルト19色 : red，green，blue，cyan，magenta，yellow，black，gray，white，darkgray，lightgray，brown，lime，olive，orange，pink，purple，teal，violet
+% ※ 注意 : graphicx,xcolor はどちらも dvipdfmx のドライバ指定が必須
+% ※ 注意 : オプションを使用する場合, tikzより前に読み込む必要あり
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 基本 %%
+
+\usepackage{amsmath,mathtools}
+% 数式コマンド equation, align などを使えるようにする
+\usepackage{amsthm}
+% 定理環境 theoremstyle 制作
+\usepackage{amssymb}
+% 基本的な数学記号などの導入
+\usepackage{latexsym}
+% 数式で使える記号を増やす
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% tikz (てぃくす)関係 %% % https://texwiki.texjp.org/?TikZ
+
+\usepackage{tikz}
+% \begin{tikzpicture} hoge \end{tikzpicture} により図式を書けるようにする
+% beamer の基礎エンジンでもある
+% ※ 注意 : graphicx,xcolor 読み込まれている
+\usepackage{tikz-cd}
+% \begin{tikzcd} hoge \end{tikzcd} により図式を書けるようにする
+% \usepackage{tikz} + \usetikzlibrary{cd} でも同等の環境
+% ※ 注意 : graphicx,xcolor のパッケージを読み込んだ後に読み込む必要がある
+\usetikzlibrary{patterns,calc,arrows,decorations,angles,shapes.geometric,fit}
+% patterns : 背景パターンを塗る 
+% intersections : 交点を求める 
+% calc : tikz の座標計算を可能にする
+% arrows : 矢印の種類を増やす
+% decorations : パスを飾る 
+% angles : 角度記号を描く 
+% shapes.geometric : いろいろな形を追加する
+% fit : 複数座標を使える
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 枠関係 %%
+\usepackage{fancybox}
+% shadowbox　や doublebox 環境の枠の追加
+\usepackage{ascmac}
+% itembox 環境 やそのほか多数の枠の追加
+\usepackage{tcolorbox} % https://www.ctan.org/pkg/tcolorbox
+% ページまたぎが可能で tikz で枠を作成できるコマンド tcolorbox を使えるようにする
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% フォント関係 %%
+\usepackage{calrsfs}
+% mathcal などで calligraphic letters を出力できるようにする
+\usepackage{mathrsfs}
+% mathscr で花文字を出力できるようにする(花文字はいろいろ種類あるらしいので自分好みのパッケージを探してください)
+\usepackage{amsfonts}
+% 黒板太文字 mathbb や フラクトゥール mathfrak を使用できるようにする
+\usepackage{bm}
+% コマンド bm で太文字の斜体などを使えるようにする
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% その他 %%
+
+\usepackage{enumerate}
+% オプションを追加することで高性能なカウンターをコマンド enumerate で使えるようにする
+\usepackage{paralist}
+% 改行しない箇条書きのコマンド inparaenum を使えるようにする
+\usepackage{here}
+% 図の位置を指定するときに [H] をオプションに追加することで強制的にその場に出力する
+\usepackage{geometry}
+% 使う紙の大きさや、余白の長さなどを指定できる
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% hyperref 関係 %%
+\usepackage{hyperref}% https://texwiki.texjp.org/?hyperref
+% TeX 文書 （DVI、PDF など） に HTML と同じハイパーリンク 機能を加えるためのマクロを導入する
+\usepackage{pxjahyper}
+% hyperref などの日本語対応化パッケージ
+
+\hypersetup{
+  setpagesize=false,
+  bookmarksdepth=section,
+  % ブックマークをどの階層(section, subsection, subsubsection など)まで作成するか。
+  bookmarksnumbered=true,
+  % ブックマークに番号を付記するかどうか。
+  colorlinks=true,
+  % リンクに色を付けるかどうか。
+  urlcolor=black,
+  % 上が true のときにurlを何色にするか。
+  citecolor=black,
+  % \cite で参照したときの色をどうするか。
+  linkcolor=black,  
+  % \ref で参照したときの色をどうするか。
+  pdftitle={black},
+  pdfsubject={},
+  pdfauthor={},
+  pdfkeywords={}
+  % pdf のメタ情報を定める。
+}
+
+\theoremstyle{definition}
+\renewcommand{\proofname}{\textbf{証明}}
+\newtheorem{thm}{Theorem}[section]
+% 定理番号に section のカウンターを含める。
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{dfn}[thm]{Definition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{re}[thm]{Remark}
+\newtheorem{exe}[thm]{Exercise}
+
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\rk}{rank}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Iso}{Iso}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Rep}{Rep}
+\DeclareMathOperator{\Coh}{Coh}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\UFD}{UFD}
+\DeclareMathOperator{\PID}{PID}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Frob}{Frob}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \numberwithin{equation}{subsection}
+% ※ 注意 : % を外して使用する
+% 数式番号に subsection のカウンターを含める。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
