@@ -1,4 +1,4 @@
-\documentclass[dvipdfmx]{jsarticle}
+\documentclass[uplatex,dvipdfmx]{jsarticle}
 \usepackage{tcolorbox}
 \usepackage{ascolorbox} % tetsuryoku
 
@@ -253,9 +253,9 @@ underlay middle={
   (frame.south west)--(frame.north west) ;
   },
 underlay last={
-  \filldraw[fill=gray,dotted,draw=gray]
+  \filldraw[fill=gray,draw=gray]
   (frame.south west) -- +(2.5pt,0pt) -- +(2.5pt,5pt) -- +(-2.5pt,5pt) -- (-2.5pt,0pt) -- cycle;
-  \draw[black,dotted,line width=.5pt]
+  \draw[draw=gray,dotted,line width=.5pt]
   (frame.south west)--(frame.north west) ;
   }
 }
@@ -373,7 +373,7 @@ boxed title style={colback=white,left=0pt,right=0pt},
 top=2pt,bottom=2pt,left=2pt,right=2pt,
 borderline west={0.75pt}{0pt}{black},
 }
-
+% lbar を使った remark 環境
 \tcolorboxenvironment{remark}
 {enhanced, colback=white, colframe=white,
 fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
