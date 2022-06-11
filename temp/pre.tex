@@ -1,4 +1,4 @@
-\documentclass[dvipdfmx]{jsarticle}
+\documentclass[uplatex,dvipdfmx]{jsarticle}
 \usepackage{tcolorbox}
 \usepackage{ascolorbox} % tetsuryoku
 
@@ -233,7 +233,6 @@ underlay last={
 {enhanced, colback=white, colframe=white,
 fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
 breakable, sharp corners,
-boxed title style={colback=white,left=0pt,right=0pt}, 
 top=2pt,bottom=2pt,left=2pt,right=2pt,
 underlay unbroken={
   \filldraw[fill=gray,draw=gray]
@@ -254,9 +253,9 @@ underlay middle={
   (frame.south west)--(frame.north west) ;
   },
 underlay last={
-  \filldraw[fill=gray,dotted,draw=gray]
+  \filldraw[fill=gray,draw=gray]
   (frame.south west) -- +(2.5pt,0pt) -- +(2.5pt,5pt) -- +(-2.5pt,5pt) -- (-2.5pt,0pt) -- cycle;
-  \draw[black,dotted,line width=.5pt]
+  \draw[draw=gray,dotted,line width=.5pt]
   (frame.south west)--(frame.north west) ;
   }
 }
@@ -339,37 +338,52 @@ fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily,
 breakable, sharp corners,
 boxed title style={colback=white,left=0pt,right=0pt}, 
 top=2pt,bottom=2pt,left=2pt,right=2pt,
-borderline west={.75pt}{2pt}{black},
 underlay unbroken={
   \filldraw[fill=gray,draw=gray]
-  (frame.south west) -- +(0pt,5pt) -- +(5pt,5pt) -- +(5pt,0pt) -- cycle;
+  (frame.south west) -- +(2.5pt,0pt) -- +(2.5pt,5pt) -- +(-2.5pt,5pt) -- (-2.5pt,0pt) -- cycle;
   \filldraw[fill=gray,draw=gray]
-  (frame.north west) -- +(0pt,-5pt) -- +(5pt,-5pt) -- +(5pt,0pt) -- cycle;
+  (frame.north west) -- +(2.5pt,0pt) -- +(2.5pt,-5pt) -- +(-2.5pt,-5pt) -- +(-2.5pt,0pt) -- cycle;
+  \draw[draw=gray,line width=.5pt]
+  (frame.north west)--(frame.south west) ;
   },
 underlay first={
   \filldraw[fill=gray,draw=gray]
-  (frame.north west) -- +(0pt,-5pt) -- +(5pt,-5pt) -- +(5pt,0pt) -- cycle;
+  (frame.north west) -- +(2.5pt,0pt) -- +(2.5pt,-5pt) -- +(-2.5pt,-5pt) -- +(-2.5pt,0pt) -- cycle;
+  \draw[draw=gray,dotted,line width=.5pt]
+  (frame.north west)--(frame.south west) ;
   },
 underlay middle={
-  \draw[black,line width=.5pt]
+  \draw[draw=gray,line width=.5pt]
   (frame.south west)--(frame.north west) ;
   },
 underlay last={
   \filldraw[fill=gray,draw=gray]
-  (frame.south west) -- +(0pt,5pt) -- +(5pt,5pt) -- +(5pt,0pt) -- cycle;
+  (frame.south west) -- +(2.5pt,0pt) -- +(2.5pt,5pt) -- +(-2.5pt,5pt) -- (-2.5pt,0pt) -- cycle;
+  \draw[black,dotted,line width=.5pt]
+  (frame.south west)--(frame.north west) ;
   }
 }
 
-\newtcolorbox{lbar}[1]
+% 線の太さを簡単に変更できるようになった leftbar 環境
+\newtcolorbox{lbar}
 {enhanced, colback=white, colframe=white,
 fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
 breakable, sharp corners,
 boxed title style={colback=white,left=0pt,right=0pt}, 
 top=2pt,bottom=2pt,left=2pt,right=2pt,
-borderline west={1.5pt}{2pt}{black},
-title={#1}
+borderline west={0.75pt}{0pt}{black},
+}
+% lbar を使った remark 環境
+\tcolorboxenvironment{remark}
+{enhanced, colback=white, colframe=white,
+fonttitle=\bfseries, coltitle=black, fonttitle=\gtfamily, 
+breakable, sharp corners,
+boxed title style={colback=white,left=0pt,right=0pt}, 
+top=2pt,bottom=2pt,left=2pt,right=2pt,
+borderline west={0.75pt}{0pt}{black},
 }
 
+% 英文解体新書の枠
 \newtcolorbox{eng}
 {
   enhanced,
@@ -379,26 +393,27 @@ title={#1}
   top=2pt,bottom=2pt,left=4pt,right=4pt,
   boxrule=1pt,
   underlay unbroken={
-    \filldraw[fill=black,draw=black]
+    \filldraw[fill=black!70!white,draw=black!70!white]
     (frame.north east) -- +(2.5pt,-2.5pt) -- ([xshift=2.5pt]frame.south east) -- +(-2.5pt,0pt);
-    \filldraw[fill=black,draw=black]
+    \filldraw[fill=black!70!white,draw=black!70!white]
     (frame.south west) -- +(2.5pt,-2.5pt) -- ([yshift=-2.5pt]frame.south east) -- +(2.5pt,0pt) -- +(2.5pt,2.5pt) -- cycle;
  },
 underlay first={
-  \filldraw[fill=black,draw=black]
+  \filldraw[fill=black!70!white,draw=black!70!white]
   (frame.north east) -- +(2.5pt,-2.5pt) -- +(0pt,-2.5pt);
-  \filldraw[fill=black,draw=black]
+  \filldraw[fill=black!70!white,draw=black!70!white]
   (frame.north east) -- +(2.5pt,-2.5pt) -- ([xshift=2.5pt]frame.south east) -- +(-2.5pt,0pt);
   },
 underlay middle={
-  \filldraw[fill=black,draw=black]
+  \filldraw[fill=black!70!white,draw=black!70!white]
   (frame.south west)--(frame.north west) ;
+  \filldraw[fill=black!70!white,draw=black!70!white]
   (frame.north east) -- +(2.5pt,0pt) -- ([xshift=2.5pt]frame.south east) -- +(-2.5pt,0pt);
   },
 underlay last={
-   \filldraw[fill=black,draw=black]
+  \filldraw[fill=black!70!white,draw=black!70!white]
    (frame.south west) -- +(2.5pt,-2.5pt) -- ([yshift=-2.5pt]frame.south east) -- +(2.5pt,0pt) -- +(2.5pt,2.5pt) -- cycle;
-   \filldraw[fill=black,draw=black]
+   \filldraw[fill=black!70!white,draw=black!70!white]
    (frame.south east) -- +(2.5pt,0pt) -- ([xshift=2.5pt]frame.north east) -- +(-2.5pt,0pt);
   },
 }
